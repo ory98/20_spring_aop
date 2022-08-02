@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 	
 	- 이 부가(공통)기능들은 프로젝트에 굉장히 중요한 역할을 하며 이 부가(공통)기능이 코드마다 반복적(중복)으로 나타나는 부분이 존재한다. 
 	
-	- 코드에서 비즈니스 핵심 로직과 부가기능을 분리하여 부가 로직을 따로 관리(모듈화)한다.
+	- 코드에서 비즈니스 핵심 로직과 부가기능을 분리하여 부가 로직을 따로 관리(모듈화=부품화)한다.
 	
 	- 종단(비즈니스 로직) 기능 , 횡단(관심,Aspect) 기능 
 	
@@ -126,46 +126,46 @@ public class Advice {
 	 *  
 	 * */
 	
-	// 메서드 호출 전
-	@Before("execution(* work())")
-	public void before() {
-		System.out.println("출근한다.");
-	}
-	
-	// 메서드 호출 후
-	@After("execution(void com.spring.aop.*.work())") 
-	public void after() {
-		System.out.println("퇴근한다.");
-	}
-	
-	// 메서드 호출 전 후
-	@Around("execution(* com.spring.aop.*.getWorkingTime())")
-	public void around(ProceedingJoinPoint pjp) throws Throwable {
-		
-		// 메서드 호출 전
-		System.out.println("=================");
-		long startTime = System.currentTimeMillis();
-		
-		// ProceedingJoinPoint의  proceed() 메서를 사용하여 타겟팅 메서드를 실행한다.
-		pjp.proceed();
-		
-		// 메서드 호출 후
-		long endTime = System.currentTimeMillis();
-		System.out.println("메서드 동작 시간 : " + (endTime - startTime) + "초");
-		
-		
-	}
-	
-	@After("execution(* getInfo(..))")
-	public void getInfo(JoinPoint jp) { // JoinPoint를 통해서 타겟 메서드의 파라메타를 전달 받을 수 있다.
-		
-		System.out.println("1 : " + Arrays.toString(jp.getArgs())); // 메서드의 파라메타를 확인
-		System.out.println("2 : " + jp.getKind());					// 메서드의 종류를 확인
-		System.out.println("3 : " + jp.getSignature().getName());	// 메서드의 이름을 확인
-		System.out.println("4 : " + jp.getTarget());				// 타겟 객체를 확인
-		System.out.println();
-		
-	}
+//	// 메서드 호출 전
+//	@Before("execution(* work())")
+//	public void before() {
+//		System.out.println("출근한다.");
+//	}
+//	
+//	// 메서드 호출 후
+//	@After("execution(void com.spring.aop.*.work())") 
+//	public void after() {
+//		System.out.println("퇴근한다.");
+//	}
+//	
+//	// 메서드 호출 전 후
+//	@Around("execution(* com.spring.aop.*.getWorkingTime())")
+//	public void around(ProceedingJoinPoint pjp) throws Throwable {
+//		
+//		// 메서드 호출 전
+//		System.out.println("=================");
+//		long startTime = System.currentTimeMillis();
+//		
+//		// ProceedingJoinPoint의  proceed() 메서를 사용하여 타겟팅 메서드를 실행한다.
+//		pjp.proceed();
+//		
+//		// 메서드 호출 후
+//		long endTime = System.currentTimeMillis();
+//		System.out.println("메서드 동작 시간 : " + (endTime - startTime) + "초");
+//		
+//		
+//	}
+//	
+//	@After("execution(* getInfo(..))")
+//	public void getInfo(JoinPoint jp) { // JoinPoint를 통해서 타겟 메서드의 파라메타를 전달 받을 수 있다.
+//		
+//		System.out.println("1 : " + Arrays.toString(jp.getArgs())); // 메서드의 파라메타를 확인
+//		System.out.println("2 : " + jp.getKind());					// 메서드의 종류를 확인
+//		System.out.println("3 : " + jp.getSignature().getName());	// 메서드의 이름을 확인
+//		System.out.println("4 : " + jp.getTarget());				// 타겟 객체를 확인
+//		System.out.println();
+//		
+//	}
 	
 	
 	
